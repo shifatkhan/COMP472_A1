@@ -3,9 +3,7 @@ import util
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
-
-# Global Vars
-mlp_clfr = MLPClassifier(activation="logistic", solver="sgd") #100 neurons by default
+from sklearn.model_selection import GridSearchCV
 
 # Load csv files
 train1_x, train1_y = util.load_csv(util.train_1_filepath)
@@ -53,15 +51,23 @@ def print_model_details(y_target, y_predict):
     print(f'\n{report}\n')
 
 
-def perform_baseMLP():
+def perform_bestMLP():
     
-    print("Performing Base MLP")
+    print("Performing Best MLP")
     print("-------------------")
     
-    print("\nTraining with dataset..\n")
+    # Find best parameters with Grid Search Cross Validation
+    param_grid = { 'activation': ['logistic', 'tanh', 'relu', 'identity'],
+                   'hidden_layer_sizes': [(30,50), (10,10,10)],
+                   'solver': ['adam', 'sgd'] }
+    
+    mlp_clfr = GridSearchCV(MLPClassifier(), param_grid, cv=3) # 5 cv (default) is good enough for a small dataset
+    
+    # Train with dataset
     mlp_model1 = mlp_clfr.fit(train1_x, train1_y)
     mlp_model2 = mlp_clfr.fit(train2_x, train2_y)
     
+    print(f'Using the best parameters for dataset 1: {mlp_model1.best_params_}')
     # Evaluate score on dataset
     eval_dataset(1, mlp_model1)
     # Plot confusion matrix
@@ -71,7 +77,15 @@ def perform_baseMLP():
     print_model_details(test1_y, test1_y_predict)
     
     # Repeat steps for dataset 2
-    eval_dataset(2, mlp_model2)
-    test2_y_predict = mlp_model2.predict(test2_x)
-    plot_confusion_matrix(mlp_model2, test2_y, test2_y_predict)
-    print_model_details(test2_y, test2_y_predict)
+    print(f'Using the best parameters for dataset 2: {mlp_model2.best_params_}')
+    #eval_dataset(2, mlp_model2)
+    #test2_y_predict = mlp_model2.predict(test2_x)
+    #plot_confusion_matrix(mlp_model2, test2_y, test2_y_predict)
+    #print_model_details(test2_y, test2_y_predict)
+    
+    
+    
+    
+    
+    
+    

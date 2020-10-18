@@ -4,9 +4,6 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 
-# Global Vars
-mlp_clfr = MLPClassifier(activation="logistic", solver="sgd") #100 neurons by default
-
 # Load csv files
 train1_x, train1_y = util.load_csv(util.train_1_filepath)
 train2_x, train2_y = util.load_csv(util.train_2_filepath)
@@ -58,7 +55,8 @@ def perform_baseMLP():
     print("Performing Base MLP")
     print("-------------------")
     
-    print("\nTraining with dataset..\n")
+    # Train with dataset
+    mlp_clfr = MLPClassifier(activation="logistic", solver="sgd") #100 neurons by default
     mlp_model1 = mlp_clfr.fit(train1_x, train1_y)
     mlp_model2 = mlp_clfr.fit(train2_x, train2_y)
     
