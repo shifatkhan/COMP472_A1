@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import util
 from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
 
 # Global Vars
 mlp_clfr = MLPClassifier(activation="logistic", solver="sgd") #100 neurons by default
@@ -37,9 +39,21 @@ def eval_dataset(dataset_num, model):
     print(f'Training Score:     {scores[0]}')
     print(f'Validating Score:   {scores[1]}')
     print(f'Test Score:         {scores[2]}\n')
+    
+
+def plot_confusion_matrix(model, y_target, y_predict):
+    
+    print("Confusion matrix:")
+    c_matrix = confusion_matrix(y_target, y_predict)
+    print(f'{c_matrix}')
+    
+    
+def print_model_details(y_target, y_predict):
+    report = classification_report(y_target, y_predict)
+    print(f'\n{report}\n')
 
 
-def perform_bestMLP():
+def perform_baseMLP():
     
     print("Performing Base MLP")
     print("-------------------")
@@ -48,6 +62,16 @@ def perform_bestMLP():
     mlp_model1 = mlp_clfr.fit(train1_x, train1_y)
     mlp_model2 = mlp_clfr.fit(train2_x, train2_y)
     
+    # Evaluate score on dataset
     eval_dataset(1, mlp_model1)
-    eval_dataset(2, mlp_model2)
+    # Plot confusion matrix
+    test1_y_predict = mlp_model1.predict(test1_x)
+    plot_confusion_matrix(mlp_model1, test1_y, test1_y_predict)
+    # Print precision, recall, f1-score, accuracy, macro-avg f1, weighted-avg f1
+    print_model_details(test1_y, test1_y_predict)
     
+    # Repeat steps for dataset 2
+    eval_dataset(2, mlp_model2)
+    test2_y_predict = mlp_model2.predict(test2_x)
+    plot_confusion_matrix(mlp_model2, test2_y, test2_y_predict)
+    print_model_details(test2_y, test2_y_predict)
