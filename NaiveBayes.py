@@ -46,21 +46,21 @@ def run_dataset(filepath_train, filepath_test, filepath_output):
     util.write_csv(filepath_output, y_test, y_pred, cmatrix)
     
     #Print result to console
-    print_result(gnb, train_accuracy, test_accuracy, y_pred, cmatrix, classification_report)
+    print_result(gnb, train_accuracy, test_accuracy, y_pred, cmatrix, classification_report, filepath_output)
 
 """
 Prints result to console. For debugging purposes
 """
-def print_result(gnb, train_acc, test_acc, y_pred, cmatrix, classification_report):
-    print("\nResult") 
-    print(f"Train Accuracy: {train_acc}")
+def print_result(gnb, train_acc, test_acc, y_pred, cmatrix, classification_report, output):
+    print(f"\nResult: {output}") 
+    """print(f"Train Accuracy: {train_acc}")
     print(f"Test Accuracy: {test_acc}")
     
     print("")
     print("row number of the instance, index of the predicted class of that instance")
     for i in range(len(y_pred)):
         print(f"{i}, {y_pred[i]}")
-        
+    """
     print("")    
     print("Confusion Matrix")
     print(cmatrix)

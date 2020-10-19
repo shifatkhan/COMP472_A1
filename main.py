@@ -1,9 +1,20 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Sep 25 13:53:22 2020
+import plotting
+import NaiveBayes
+import Base_DT
+import Best_DT
+import Perceptron
+import Base_MLP
+import Best_MLP
 
-@author: ShifatKhan
-"""
+##--------------------
 
-print("Hello COMP472")
-print("hello")
+NaiveBayes.run_naivebayes()
+
+Base_DT.run()
+Best_DT.run()
+
+Perceptron.run_perceptron()
+
+Base_MLP.run()
+Best_MLP.run()

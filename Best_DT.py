@@ -8,9 +8,9 @@ import util
 # TODO: Move to util?
 def print_debug(data_index, clf, Y_pred, confusion_matrix, classification_report):
     print("\na)")
-    for i in range(len(Y_pred)):
+    """for i in range(len(Y_pred)):
         print(f"{i}, {Y_pred[i]}")
-        
+    """    
     print("\nb)")
     print("Confusion Matrix")
     print(confusion_matrix)

@@ -12,10 +12,10 @@ from collections import Counter
 train1 = util.train_1_filepath
 train2 = util.train_2_filepath
 
-attr1,classes1 = util.load_csv(train1)
-attr2,classes2 = util.load_csv(train2)
-
-def drawPlotInstance(classes1, classes2):
+def drawPlotInstance():
+    attr1,classes1 = util.load_csv(train1)
+    attr2,classes2 = util.load_csv(train2)
+    
     #listOfY contains the last column of the training data set
     counts_1 = Counter(classes1) #counter counts the number of instances of each class
     counts_2 = Counter(classes2)
@@ -57,4 +57,4 @@ def drawPlotInstance(classes1, classes2):
     axes[1].set(ylabel="Dataset 2")
     axes[1].set(xlabel="Classes")
     
-drawPlotInstance(classes1, classes2)
+#drawPlotInstance(classes1, classes2)
