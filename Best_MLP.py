@@ -64,35 +64,35 @@ def run():
                    'solver': ['adam', 'sgd'] }
     
     mlp_clfr1 = GridSearchCV(MLPClassifier(), param_grid, cv=3)
-    mlp_clfr2 = GridSearchCV(MLPClassifier(), param_grid, cv=15)
+    mlp_clfr2 = GridSearchCV(MLPClassifier(), param_grid, cv=5)
     
     # Train with dataset
-    #mlp_model1 = mlp_clfr1.fit(train1_x, train1_y)
+    mlp_model1 = mlp_clfr1.fit(train1_x, train1_y)
     mlp_model2 = mlp_clfr2.fit(train2_x, train2_y)
     
     ### DATASET 1 ###
     # Predict trained model with dataset
-    #y_predict1 = mlp_model1.predict(test1_x)
+    y_predict1 = mlp_model1.predict(test1_x)
     y_predict2 = mlp_model2.predict(test2_x)
     
     # Evaluate score on dataset
-    #eval_dataset(1, mlp_model1)
+    eval_dataset(1, mlp_model1)
     
     # Plot confusion matrix
-    #c_matrix1 = plot_confusion_matrix(mlp_model1, test1_y, y_predict1)
+    c_matrix1 = plot_confusion_matrix(mlp_model1, test1_y, y_predict1)
     
     # Print precision, recall, f1-score, accuracy, macro-avg f1, weighted-avg f1
-    #print_model_details(test1_y, y_predict1)
+    print_model_details(test1_y, y_predict1)
     
     # Repeat steps for dataset 2
-    #eval_dataset(2, mlp_model2)
+    eval_dataset(2, mlp_model2)
     y_predict2 = mlp_model2.predict(test2_x)
     c_matrix2 = plot_confusion_matrix(mlp_model2, test2_y, y_predict2)
-    #print_model_details(test2_y, y_predict2)
+    print_model_details(test2_y, y_predict2)
     
     
     # Output results into file
-    #util.write_csv("./output/Best-MLP-DS1.csv", test1_y, y_predict1, c_matrix1)
+    util.write_csv("./output/Best-MLP-DS1.csv", test1_y, y_predict1, c_matrix1)
     util.write_csv("./output/Best-MLP-DS2.csv", test2_y, y_predict2, c_matrix2)
     
     
