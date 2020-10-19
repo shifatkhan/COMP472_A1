@@ -15,23 +15,46 @@ train2 = util.train_2_filepath
 attr1,classes1 = util.load_csv(train1)
 attr2,classes2 = util.load_csv(train2)
 
-def drawPlotInstance(listOfY):
+def drawPlotInstance(classes1, classes2):
     #listOfY contains the last column of the training data set
-    counts = Counter(listOfY) #counter counts the number of instances of each class
-    x_array = []
-    y_count_array = []
-    length = len(counts)
+    counts_1 = Counter(classes1) #counter counts the number of instances of each class
+    counts_2 = Counter(classes2)
+    x_array_1 = []
+    x_array_2 = []
+    y_count_array_1 = []
+    y_count_array_2 = []
+    length_1 = len(counts_1)
+    length_2 = len(counts_2)
     
+    #==================== dataset 1
     #building x axis
-    for i in range(length):
-        x_array.append(i)
+    for i in range(length_1):
+        x_array_1.append(i)
     
     #building y axis
-    for i in range(length):
-        y_count_array.append(counts[i])
+    for i in range(length_1):
+        y_count_array_1.append(counts_1[i])
     
-    plt.plot(x_array, y_count_array)
-    plt.ylabel("Number of instances")
-    plt.xlabel("Training set 2")
+    #==================== dataset 2
+    #building x axis
+    for i in range(length_2):
+        x_array_2.append(i)
     
-#drawPlotInstance(classes2)
+    #building y axis
+    for i in range(length_2):
+        y_count_array_2.append(counts_2[i])
+        
+    #plotting
+    figures, axes = plt.subplots(2)
+    
+    axes[0].plot(x_array_1, y_count_array_1)
+    #axes[0].set_title("Dataset 1")
+    axes[0].set(ylabel="Dataset 1")
+    axes[0].set(xlabel="Classes")
+    
+    axes[1].plot(x_array_2, y_count_array_2)
+    #axes[1].set_title("Dataset 2")
+    axes[1].set(ylabel="Dataset 2")
+    axes[1].set(xlabel="Classes")
+    
+drawPlotInstance(classes1, classes2)
