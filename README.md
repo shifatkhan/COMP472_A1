@@ -1,6 +1,8 @@
-github.com/shifatkhan/COMP472_A1/
+https://github.com/shifatkhan/NeuralNetworkClassifiers
 
-# COMP472 Assignment 1
+# Classifier program using multiple different methods including neural networks.
+Made for COMP472 at Concordia University.
+
 ### Team:
 Shifat Khan, William Ngo, Thanh Tung Nguyen
 
